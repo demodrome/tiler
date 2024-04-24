@@ -41,3 +41,39 @@ body {
     font-weight: 400;
     font-style: normal;
 }
+
+html, body {
+    height: 100%;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+/* Sections */
+.sidebar-container {
+    background-color: var(--color-mid);
+    border: solid 2px var(--color-light);
+    flex: 0 0 300px;
+}
+
+.sidebar-container::after {
+    display: block;
+    position: relative;
+    left: 3px;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background-color: var(--color-mid);
+}
+
+.tilemap-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
