@@ -13,7 +13,7 @@ class Tilemap {
         this.tileDimensions = config.tileDimensions || 16;
         this.mapName = config.mapName || "Untitled";
 
-        // Tilemaps will copntain multiple layers. A base layer will be generated automatically.
+        // Tilemaps will contain multiple layers. A base layer will be generated automatically.
         this.layers = [];
     }
 
