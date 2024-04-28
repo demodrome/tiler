@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiler | Tilemaps Made Easy</title>
     <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/06923015d8.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -12,14 +13,515 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Modal -->
+    <div class="modal hidden">
+        <div class="modal__header">
+            <h2 class="modal__heading">Create new tilemap</h2>
+        </div>
+        <p class="modal__info">Map units are measured in tiles. To determine pixel dimensions, multiply by tile size.</p>
+        <div class="modal__body">
+            <div class="input-group">
+                <label for="tilemap-width">Width</label>
+                <input type="number" name="width" id="tilemap-width" required>
+            </div>
+            <div class="input-group">
+                <label for="tilemap-height">Height</label>
+                <input type="number" name="tilemap-height" id="tilemap-height" required>
+            </div>
+            <div class="input-group">
+                <label for="tilemap-height">Tile size</label>
+                <input type="number" name="tile-size" id="tile-size" placeholder="32" disabled>
+            </div>
+            <div class="input-group">
+                <button>Create</button>
+            </div>
+        </div>
+    </div>
+    <div class="fade hidden"></div>
+    <!-- End modal -->
+    <header class="header">
+        <a href="#" class="brand"><i class="fa-brands fa-hive" style="color: #63E6BE;"></i>tiler</a>
+    </header>
     <div class="container">
-        <div class="sidebar-container"></div>
+        <div class="sidebar-container">
+            <!-- Menu -->
+            <div class="menu">
+                <div class="menu__header">
+                    <h2 class="menu__title">Tools</h2>
+                </div>
+                <div class="collapse-content">
+                    <div class="menu__body">
+                        <ul class="menu__list">
+                            <li class="menu__menu-item">
+                                <button class="menu__menu-control menu__menu-control--active">Move</button>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- ---- -->
+            <!-- Menu -->
+            <div class="menu">
+                <div class="menu__header">
+                    <h2 class="menu__title">Tileset</h2>
+                </div>
+                <div class="collapse-content">
+                    <div class="menu__body">
+                        <ul class="menu__list menu__list--grid">
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                            <li class="menu__menu-item">
+                                <img src="./images/tiles/placeholder.png" alt="Placeholder tile" class="tileset__tile-img" width="32" height="32">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- ---- -->
+            <!-- Menu -->
+            <div class="menu">
+                <div class="menu__header">
+                    <h2 class="menu__title">Layers</h2>
+                </div>
+                <div class="collapse-content">
+                    <div class="menu__body">
+                        <ul class="menu__list">
+                            <li class="menu__menu-item">
+                                <button class="menu__menu-control">Foreground</button>
+                                <i class="fa-solid fa-trash"></i>
+                            </li>
+                            <li class="menu__menu-item menu__menu-item--active">
+                                <button class="menu__menu-control">Lighting</button>
+                                <i class="fa-solid fa-trash"></i>
+                            </li>
+                            <li class="menu__menu-item">
+                                <button class="menu__menu-control">Mid level</button>
+                                <i class="fa-solid fa-trash"></i>
+                            </li>
+                            <li class="menu__menu-item">
+                                <button class="menu__menu-control">Background</button>
+                                <i class="fa-solid fa-trash"></i>
+                            </li>
+                            <li class="menu__menu-item">
+                                <button type="submit" class="menu__menu-control">Base</button>
+                                <i class="fa-solid fa-trash"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- ---- -->
+        </div>
         <div class="tilemap-container">
-            <div class="tilemap"></div>
+            <div class="tilemap">
+                <!-- tilemap row -->
+                <div class="tilemap__row">
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                </div>
+                <!-- tilemap row -->
+                <div class="tilemap__row">
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                </div>
+                <!-- tilemap row -->
+                <div class="tilemap__row">
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                </div>
+                <!-- tilemap row -->
+                <div class="tilemap__row">
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                    <div class="tilemap__tile">
+                        <img src="./images/tiles/placeholder.png" alt="" class="tilemap__tile-img">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
+    <script src="./src/tilemap-tile.js"></script>
     <script src="./src/tilemap.js"></script>
+    <script src="./src/app.js"></script>
 </body>
 </html>
